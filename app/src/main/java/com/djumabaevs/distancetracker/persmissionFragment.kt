@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.djumabaevs.distancetracker.Permissions.hasLocationPermission
 import com.djumabaevs.distancetracker.Permissions.requestLocationPermission
+import com.djumabaevs.distancetracker.databinding.FragmentPermissionBinding
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 
