@@ -1,6 +1,7 @@
 package com.djumabaevs.distancetracker
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.fragment.app.Fragment
 
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_START
+import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_STOP
 import com.djumabaevs.distancetracker.MapUtil.setCameraPosition
 import com.djumabaevs.distancetracker.Permissions.hasBackgroundLocationPermission
 import com.djumabaevs.distancetracker.Permissions.requestBackgroundLocationPermission
@@ -212,6 +214,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
             requireContext().startService(this)
         }
     }
-
+    private fun showBiggerPicture() {
+        val bounds = LatLngBounds.Builder()
+        for (location in locationList) {
+            bounds.include(location)
+        }
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounds.build(), 100
+            ), 2000, null
+        )
+        addMarker(locationList.first())
+        addMarker(locationList.last())
+    }
 
 }
