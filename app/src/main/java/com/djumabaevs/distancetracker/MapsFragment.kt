@@ -257,7 +257,30 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         }
     }
 
-
+    @SuppressLint("MissingPermission")
+    private fun mapReset() {
+        fusedLocationProviderClient.lastLocation.addOnCompleteListener {
+            val lastKnownLocation = LatLng(
+                it.result.latitude,
+                it.result.longitude
+            )
+            map.animateCamera(
+                CameraUpdateFactory.newCameraPosition(
+                    setCameraPosition(lastKnownLocation)
+                )
+            )
+            for (polyLine in polylineList) {
+                polyLine.remove()
+            }
+            for (marker in markerList) {
+                marker.remove()
+            }
+            locationList.clear()
+            markerList.clear()
+            binding.resetButton.hide()
+            binding.startButton.show()
+        }
+    }
 
 
 }
