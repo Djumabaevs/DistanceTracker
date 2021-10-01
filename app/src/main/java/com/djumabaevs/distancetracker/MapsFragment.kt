@@ -12,8 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_START
 import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_STOP
+import com.djumabaevs.distancetracker.MapUtil.calculateElapsedTime
+import com.djumabaevs.distancetracker.MapUtil.calculateTheDistance
 import com.djumabaevs.distancetracker.MapUtil.setCameraPosition
 import com.djumabaevs.distancetracker.Permissions.hasBackgroundLocationPermission
 import com.djumabaevs.distancetracker.Permissions.requestBackgroundLocationPermission
@@ -27,6 +32,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.vmadalin.easypermissions.EasyPermissions
+import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMarkerClickListener, EasyPermissions.PermissionCallbacks {
@@ -250,6 +256,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
             binding.resetButton.show()
         }
     }
+
+
 
 
 }
