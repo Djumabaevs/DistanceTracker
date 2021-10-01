@@ -129,7 +129,17 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         )
         polylineList.add(polyline)
     }
-
+    private fun followPolyline() {
+        if (locationList.isNotEmpty()) {
+            map.animateCamera(
+                (CameraUpdateFactory.newCameraPosition(
+                    setCameraPosition(
+                        locationList.last()
+                    )
+                )), 1000, null
+            )
+        }
+    }
 
 
 }
