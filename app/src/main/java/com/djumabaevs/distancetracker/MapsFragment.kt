@@ -32,3 +32,30 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
     private var markerList = mutableListOf<Marker>()
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.tracking = this
+
+        binding.startButton.setOnClickListener {
+            onStartButtonClicked()
+        }
+        binding.stopButton.setOnClickListener {
+            onStopButtonClicked()
+        }
+        binding.resetButton.setOnClickListener {
+            onResetButtonClicked()
+        }
+
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        return binding.root
+    }
+
+}
