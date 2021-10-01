@@ -198,5 +198,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         timer.start()
     }
 
+    private fun stopForegroundService() {
+        binding.startButton.disable()
+        sendActionCommandToService(ACTION_SERVICE_STOP)
+    }
+
+    private fun sendActionCommandToService(action: String) {
+        Intent(
+            requireContext(),
+            TrackerService::class.java
+        ).apply {
+            this.action = action
+            requireContext().startService(this)
+        }
+    }
+
 
 }
