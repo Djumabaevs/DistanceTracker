@@ -89,6 +89,33 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         observeTrackerService()
     }
 
+    private fun observeTrackerService() {
+        TrackerService.locationList.observe(viewLifecycleOwner, {
+            if (it != null) {
+                locationList = it
+                if (locationList.size > 1) {
+                    binding.stopButton.enable()
+                }
+                drawPolyline()
+                followPolyline()
+            }
+        })
+        TrackerService.started.observe(viewLifecycleOwner, {
+            started.value = it
+        })
+        TrackerService.startTime.observe(viewLifecycleOwner, {
+            startTime = it
+        })
+        TrackerService.stopTime.observe(viewLifecycleOwner, {
+            stopTime = it
+            if (stopTime != 0L) {
+                if (locationList.isNotEmpty()) {
+                    showBiggerPicture()
+                    displayResults()
+                }
+            }
+        })
+    }
 
 
 }
