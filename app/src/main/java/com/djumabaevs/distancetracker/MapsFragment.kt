@@ -283,4 +283,43 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
     }
 
 
+    override fun onMyLocationButtonClick(): Boolean {
+        binding.hintTextView.animate().alpha(0f).duration = 1500
+        lifecycleScope.launch {
+            delay(2500)
+            binding.hintTextView.hide()
+            binding.startButton.show()
+        }
+        return false
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            SettingsDialog.Builder(requireActivity()).build().show()
+        } else {
+            requestBackgroundLocationPermission(this)
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        onStartButtonClicked()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        return true
+    }
 }
