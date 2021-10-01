@@ -5,10 +5,13 @@ import android.graphics.Color
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_START
 import com.djumabaevs.distancetracker.MapUtil.setCameraPosition
 import com.djumabaevs.distancetracker.Permissions.hasBackgroundLocationPermission
 import com.djumabaevs.distancetracker.Permissions.requestBackgroundLocationPermission
@@ -162,6 +165,38 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButto
         mapReset()
     }
 
+    private fun startCountDown() {
+        binding.timerTextView.show()
+        binding.stopButton.disable()
+        val timer: CountDownTimer = object : CountDownTimer(4000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val currentSecond = millisUntilFinished / 1000
+                if (currentSecond.toString() == "0") {
+                    binding.timerTextView.text = "GO"
+                    binding.timerTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.black
+                        )
+                    )
+                } else {
+                    binding.timerTextView.text = currentSecond.toString()
+                    binding.timerTextView.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.red
+                        )
+                    )
+                }
+            }
+
+            override fun onFinish() {
+                sendActionCommandToService(ACTION_SERVICE_START)
+                binding.timerTextView.hide()
+            }
+        }
+        timer.start()
+    }
 
 
 }
