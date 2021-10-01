@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.djumabaevs.distancetracker.mapsFragment"
+        android:name="com.djumabaevs.distancetracker.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" >
         <action
@@ -37,7 +37,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="result"
-            app:argType="com.example.distancetrackerapp.model.Result" />
+            app:argType="com.djumabaevs.distancetracker.Result" />
     </dialog>
 
 </navigation>
