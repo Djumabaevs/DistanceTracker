@@ -17,3 +17,18 @@ object NotificationModule {
         )
     }
 
+    @ServiceScoped
+    @Provides
+    fun provideNotificationBuilder(
+        @ApplicationContext context: Context,
+        pendingIntent: PendingIntent
+    ): NotificationCompat.Builder {
+        return NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+            .setAutoCancel(false)
+            .setOngoing(true)
+            .setSmallIcon(R.drawable.ic_run)
+            .setContentIntent(pendingIntent)
+    }
+
+
+
