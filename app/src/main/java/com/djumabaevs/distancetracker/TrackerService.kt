@@ -78,6 +78,11 @@ class TrackerService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+    private fun startForegroundService() {
+        createNotificationChannel()
+        startForeground(NOTIFICATION_ID, notification.build())
+    }
+
 
 
 
