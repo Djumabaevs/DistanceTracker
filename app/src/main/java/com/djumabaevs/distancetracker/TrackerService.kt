@@ -34,6 +34,18 @@ class TrackerService : LifecycleService() {
 
         locationList.postValue(mutableListOf())
     }
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(result: LocationResult?) {
+            super.onLocationResult(result)
+            result?.locations?.let { locations ->
+                for (location in locations) {
+                    updateLocationList(location)
+                    updateNotificationPeriodically()
+                }
+            }
+        }
+    }
+
 
 
 
