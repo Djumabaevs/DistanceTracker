@@ -83,6 +83,20 @@ class TrackerService : LifecycleService() {
         startForeground(NOTIFICATION_ID, notification.build())
     }
 
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() {
+        val locationRequest = LocationRequest.create().apply {
+            interval = LOCATION_UPDATE_INTERVAL
+            fastestInterval = LOCATION_FASTEST_UPDATE_INTERVAL
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+        fusedLocationProviderClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.getMainLooper()
+        )
+        startTime.postValue(System.currentTimeMillis())
+    }
 
 
 
