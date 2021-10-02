@@ -97,6 +97,20 @@ class TrackerService : LifecycleService() {
         )
         startTime.postValue(System.currentTimeMillis())
     }
+    private fun stopForegroundService() {
+        removeLocationUpdates()
+        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(
+            NOTIFICATION_ID
+        )
+        stopForeground(true)
+        stopSelf()
+        stopTime.postValue(System.currentTimeMillis())
+    }
+
+    private fun removeLocationUpdates() {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
 
 
 
