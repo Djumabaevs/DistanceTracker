@@ -17,6 +17,10 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_START
 import com.djumabaevs.distancetracker.Constants.ACTION_SERVICE_STOP
+import com.djumabaevs.distancetracker.ExtensionFunctions.disable
+import com.djumabaevs.distancetracker.ExtensionFunctions.enable
+import com.djumabaevs.distancetracker.ExtensionFunctions.hide
+import com.djumabaevs.distancetracker.ExtensionFunctions.show
 import com.djumabaevs.distancetracker.MapUtil.calculateElapsedTime
 import com.djumabaevs.distancetracker.MapUtil.calculateTheDistance
 import com.djumabaevs.distancetracker.MapUtil.setCameraPosition
@@ -32,6 +36,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.vmadalin.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
