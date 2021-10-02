@@ -1,5 +1,19 @@
 package com.djumabaevs.distancetracker
 
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import androidx.core.app.NotificationCompat
+import com.djumabaevs.distancetracker.Constants.NOTIFICATION_CHANNEL_ID
+import com.djumabaevs.distancetracker.Constants.PENDING_INTENT_REQUEST_CODE
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ServiceComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ServiceScoped
+
 @Module
 @InstallIn(ServiceComponent::class)
 object NotificationModule {
