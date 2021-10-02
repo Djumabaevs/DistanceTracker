@@ -27,6 +27,14 @@ class TrackerService : LifecycleService() {
 
         val locationList = MutableLiveData<MutableList<LatLng>>()
     }
+    private fun setInitialValues() {
+        started.postValue(false)
+        startTime.postValue(0L)
+        stopTime.postValue(0L)
+
+        locationList.postValue(mutableListOf())
+    }
+
 
 
 
