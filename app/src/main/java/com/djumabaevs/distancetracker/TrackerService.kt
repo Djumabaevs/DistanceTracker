@@ -46,7 +46,13 @@ class TrackerService : LifecycleService() {
         }
     }
 
-
+    private fun updateLocationList(location: Location) {
+        val newLatLng = LatLng(location.latitude, location.longitude)
+        locationList.value?.apply {
+            add(newLatLng)
+            locationList.postValue(this)
+        }
+    }
 
 
 
