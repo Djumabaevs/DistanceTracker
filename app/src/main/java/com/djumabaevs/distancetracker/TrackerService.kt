@@ -53,6 +53,31 @@ class TrackerService : LifecycleService() {
             locationList.postValue(this)
         }
     }
+    override fun onCreate() {
+        setInitialValues()
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        super.onCreate()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        intent?.let {
+            when (it.action) {
+                ACTION_SERVICE_START -> {
+                    started.postValue(true)
+                    startForegroundService()
+                    startLocationUpdates()
+                }
+                ACTION_SERVICE_STOP -> {
+                    started.postValue(false)
+                    stopForegroundService()
+                }
+                else -> {
+                }
+            }
+        }
+        return super.onStartCommand(intent, flags, startId)
+    }
+
 
 
 
