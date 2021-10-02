@@ -111,6 +111,14 @@ class TrackerService : LifecycleService() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
+    private fun updateNotificationPeriodically() {
+        notification.apply {
+            setContentTitle("Distance Travelled")
+            setContentText(locationList.value?.let { calculateTheDistance(it) } + "km")
+        }
+        notificationManager.notify(NOTIFICATION_ID, notification.build())
+    }
+
 
 
 
