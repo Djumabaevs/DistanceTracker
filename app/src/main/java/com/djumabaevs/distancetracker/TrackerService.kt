@@ -119,7 +119,16 @@ class TrackerService : LifecycleService() {
         notificationManager.notify(NOTIFICATION_ID, notification.build())
     }
 
-
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                NOTIFICATION_CHANNEL_NAME,
+                IMPORTANCE_LOW
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
 
 
 }
